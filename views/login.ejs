@@ -1,18 +1,40 @@
-<%- include('partials/header.ejs') %>
+<%- include('partials/header') -%>
 
-<h2 class="page-title"><%= title %></h2>
-<div class="login-form">
-    <form action="/login" method="post">
-        <div class="user-input"><input type="email" name="emailInput" placeholder="email"></div>
-        <div class="pass-input"><input type="password" name="pwdInput" placeholder="password"></div>
-        <div align="center"><button type="submit" class="btn btn-primary">Login</button></div>
-    </form>
-</div>
+<main class="container">
+  <div class="row justify-content-center">
+    <section class="col-6 mt-5">
+      <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
+      <div class="alert alert-danger"><%= el.msg %></div>
+      <% }) %> <% } %> <% if (locals.messages.info) { %> <%
+      messages.info.forEach( el => { %>
+      <div class="alert alert-info"><%= el.msg %></div>
+      <% }) %> <% } %>
+      <form action="/login" method="POST">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"
+            >Email address</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            name="email"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            name="password"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </section>
+  </div>
+</main>
 
-<% if (error != null) { %>
-    <div class="login-error"><%= error %></div>
-<% } %>
-
-<p align="center"><a href="/login/new-acct">No login? Create a new account.</a></p>
-
-<%- include('partials/footer.ejs') %>
+<%- include('partials/footer') -%>
