@@ -6,6 +6,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const flash = require('express-flash');
 const logger = require('morgan');
+const cloudinary = require('cloudinary');
 const methodOverride = require("method-override");
 const connectDB = require('./config/database')
 const indexRouter = require('./routes/index');
@@ -40,6 +41,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use(flash())
+
   
 app.use('/', indexRouter);
 app.use('/menu', menuRouter);
@@ -47,4 +49,9 @@ app.use('/login', loginRouter);
  
 app.listen(process.env.PORT, ()=>{
     console.log('Server is running, you better catch it!')
-})    
+})  
+
+//cloudinary
+// cloudinary.v2.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg",
+//   { public_id: "olympic_flag" }, 
+//   function(error, result) {console.log(result); });
